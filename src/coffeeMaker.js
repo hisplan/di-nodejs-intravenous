@@ -9,14 +9,18 @@ var CoffeeMaker = function(grinder, heater, pump, model) {
 
 CoffeeMaker.prototype.brew = function() {
   console.log('model name: %s', this.model);
-  this.grinder.grind();
-  this.pump.pump();
-  this.heater.on();
+  
+  var isGrindDone = this.grinder.grind();
+  var isPumpDone = this.pump.pump();
+  var isHeaterOn = this.heater.on();
+  
+  // true indicating everything is successful
+  return isGrindDone && isPumpDone && isHeaterOn;
 };
 
 CoffeeMaker.prototype.dispose = function() {
    console.log('Disposing CoffeeMaker'); 
 };
 
-CoffeeMaker.$inject = ['grinder', 'heater', 'pump'];
+CoffeeMaker.$inject = ['Grinder', 'Heater', 'Pump'];
 module.exports = CoffeeMaker;

@@ -10,5 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "intravenous": "^0.1.4-beta"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "sinon": "^1.17.2"
   }
 }

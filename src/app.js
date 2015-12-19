@@ -1,12 +1,14 @@
 "use strict";
 
-// cons: need to register all the dependencies in advance
 var intravenous = require('intravenous');
-var grinder = require('./grinder');
-var heater = require('./heater');
-var pump = require('./pump');
-var coffeeMaker = require('./coffeeMaker');
 
+// import necessary modules
+var Grinder = require('./grinder');
+var Heater = require('./heater');
+var Pump = require('./pump');
+var CoffeeMaker = require('./coffeeMaker');
+
+// get IoC container
 var container = intravenous.create({
     onDispose: function (instance, key) {
         console.log("Calling dispose method for service " + key);
@@ -14,13 +16,17 @@ var container = intravenous.create({
     }
 });
 
-container.register('grinder', grinder);
-container.register('heater', heater);
-container.register('pump', pump);
-container.register('coffeeMaker', coffeeMaker);
+// register all the necessary modules.
+// cons: need to register all the dependencies in advance
+container.register('Grinder', Grinder);
+container.register('Heater', Heater);
+container.register('Pump', Pump);
+container.register('CoffeeMaker', CoffeeMaker);
 
-var myCoffeeMaker = container.get('coffeeMaker', 'Samsung');
+var coffeeMaker = container.get('CoffeeMaker', 'Samsung');
 
-myCoffeeMaker.brew();
+var result = coffeeMaker.brew();
+
+console.log(result ? 'successful' : 'failed');
 
 container.dispose();
