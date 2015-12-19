@@ -16,8 +16,14 @@ npm install
 
 ## Run
 
+Run the application:
 ```bash
 npm src/app
+```
+
+Run the unit test:
+```bash
+mocha
 ```
 
 ## Notes
